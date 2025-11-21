@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Order Summary</title>
+</head>
+<body>
+<ul id="bill-items"></ul>
+<span id="bill-total"></span>
+<span id="bill-location"></span>
+
+<h2>Your Order</h2>
+
+<ul id="bill-items"></ul>
+
+<h3>Total Amount: ₹<span id="bill-total">0</span></h3>
+
+<button onclick="window.location.href='index.html'">Back to Home</button>
+
+<script>
+const items = JSON.parse(localStorage.getItem("cart")) || [];
+const total = localStorage.getItem("total") || 0;
+
+document.getElementById("bill-items").innerHTML =
+  items.map(i => `<li>${i.name} - ₹${i.price}</li>`).join("");
+
+document.getElementById("bill-total").textContent = total;
+</script>
+
+</body>
+</html>

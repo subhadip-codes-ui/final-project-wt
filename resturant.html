@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* CONTACT SECTION */
+.contact {
+  background: #fff3f3;
+  padding: 50px 20px;
+  text-align: center;
+  border-top: 3px solid red;
+  margin-top: 40px;
+}
+
+.contact h2 {
+  color: red;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.contact p {
+  color: #555;
+  margin-bottom: 25px;
+}
+
+.contact form {
+  max-width: 450px;
+  margin: 0 auto 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact input,
+.contact textarea {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s;
+}
+
+.contact input:focus,
+.contact textarea:focus {
+  border-color: red;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
+}
+
+.contact button {
+  background: red;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact button:hover {
+  background: darkred;
+}
+
+.contact-info {
+  margin-top: 20px;
+  line-height: 1.8;
+}
+
+.contact-info p {
+  color: #333;
+}
+
+    </style>
+</head>
+<body>
+     <!-- LOCATION -->
+  <section class="location">
+    <h3>Deliver to:</h3>
+    <input type="text" id="userLocation" placeholder="Enter your location (e.g., Patna)">
+    <button onclick="setLocation()">Set Location</button>
+    <p id="showLocation"></p>
+  </section>
+     <!-- RESTAURANTS -->
+  <section id="restaurants">
+    <h2>Top Restaurants Near You</h2>
+    <div class="restaurant-container">
+      <div class="restaurant-card">
+        <img src="Dominos-Pizza-2.avif" alt="Dominos">
+        <h3>Domino’s Pizza</h3>
+        <p>Patna - Rajendra Nagar</p>
+      </div>
+      <div class="restaurant-card">
+        <img src="kfc.jpeg" alt="KFC">
+        <h3>KFC</h3>
+        <p>Patna - Fraser Road</p>
+      </div>
+      <div class="restaurant-card">
+        <img src="little house.avif" alt="Litti House">
+        <h3>The Litti House</h3>
+        <p>Patna - Boring Road</p>
+      </div>
+    </div>
+    <a href="first.html">← Back to Home</a>
+
+  </section>
+  <!-- CONTACT SECTION -->
+<section class="contact">
+  <h2>Contact Us</h2>
+  <p>We’d love to hear from you! Fill out the form below or reach us through our contact details.</p>
+
+  <form>
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+
+  <div class="contact-info">
+    <p><strong>Email:</strong> support@foodtime.com</p>
+    <p><strong>Phone:</strong> +91 8863081088</p>
+    <p><strong>Address:</strong> Patna, Bihar, India</p>
+  </div>
+</section>
+
+</body>
+</html>

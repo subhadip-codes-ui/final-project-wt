@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Order Website</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: white;
+      
+      color: #333;
+    }
+
+   
+    header {
+      background: red;
+      padding: 15px 20px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+      margin-top: 50px;
+    
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    header a:hover{
+background-color: whitesmoke;
+border-radius: 50px;
+    }
+
+   
+    .hero {
+     
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: url("logo.jpg") no-repeat center center/cover;
+      color: black;
+      flex-direction: column;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .hero button {
+      padding: 10px 20px;
+      border: none;
+      background: red;
+      color: white;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+   
+    .menu {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .menu h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .menu-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .card h3 {
+      margin: 10px 0;
+    }
+
+    .card button {
+      padding: 8px 15px;
+      border: none;
+      background: #ff4757;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .contact{
+      padding: 2rem;
+      text-align: center;
+    }
+    .contact form{
+      max-width:400px;
+      margin:auto;
+      display: flex;
+      flex-direction: column;
+      gap:1rem;
+    }
+    .contact input,.contact textarea{
+      padding: 0.7rem;
+      border: 1px solid #ccc;
+      border-radius:5px;
+    }
+    .contact button{
+      color:black;
+      background: yellow;
+      width: 50%;
+      height: 20px;
+    }
+
+    
+    
+    main{
+      width: 100%;
+      height: max-content;
+      min-height: 100vh;
+      padding: 2%;
+      background: greenyellow;
+      margin: 250px;
+    }
+    .main-navbar{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+    }
+    /* .search{
+      width: 60%;
+      height: 40px;
+      display: flex;
+      justify-content: space-around;
+      background: white;
+      border-radius: 50px;
+
+    }
+    .search input{
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      border: solid;
+      border-radius: 20px;
+    }
+    .search-btn{
+      margin-left: 20px;
+      color: white;
+      background: black;
+      border-radius: 200px;
+    } */
+
+    
+    .search {
+      position: relative;
+      width: 320px;
+      margin-top: 50px;
+    }
+
+    .search input {
+      width: 100%;
+      padding: 12px 50px 12px 15px; /* right side space for button */
+      border: 2px solid #ccc;
+      border-radius: 30px;
+      font-size: 16px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .search input:focus {
+      border-color: #4a90e2;
+      box-shadow: 0 0 8px rgba(74, 144, 226, 0.3);
+    }
+
+    .search-btn {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #4a90e2;
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .search-btn:hover {
+      background: #357abd;
+    }
+    #floating-cart {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  font-size: 24px;
+}
+
+#cart-count {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: yellow;
+  color: black;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 2px 8px;
+  font-size: 14px;
+}
+#notification-box {
+  position: fixed;
+  top: 100px;
+  right: -280px;
+  width: 250px;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  transition: 0.4s ease;
+  z-index: 2000;
+}
+
+#notification-box.show {
+  right: 20px;
+}
+
+#notification-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+#notification-box li {
+  padding: 10px;
+  background: #f4f4f4;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  animation: slideFade 0.5s ease;
+}
+
+@keyframes slideFade {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+
+   
+  </style>
+</head>
+<body>
+ 
+  
+
+
+  <header>
+    <h1>F<span style="color: rgb(30, 56, 30);">oo</span>d Time</h1>
+    <div class="sidebar-menu">
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+         <li><a href="resturant.html"> Restaurants</a></li>
+        <li><a href="#menu">Menu</a></li>
+          <li><a href="bill.html">Bills</a></li>
+        
+      <li><a href="#" id="notify-btn"><ion-icon name="notifications-outline"></ion-icon> Notification</a></li>
+        <li><a href="order.html">Order</a></li>
+      <li><a href="form.html">Login / Signup</a></li>
+
+        <section id="contact" class="contact">
+    
+  </section>
+</li>
+      </ul>
+    </nav>
+    </div>
+  </header>
+  
+  
+   <div class="main">
+    <div class="main-navbar">
+    <ion-icon class="menu-toggle" name="menu-outline"></ion-icon>
+    <div class="search">
+      <input type="text" placeholder="What you want to eat?">
+      <button class="search-btn">search</button>
+    </div> 
+    <div class="profile">
+    <a class="cart" href="#" ><ion-icon name="cart-outline"></ion-icon></a>
+    <a class="user" href="#"><ion-icon name="person-outline"></ion-icon></a>
+    </div>
+    </div>
+  </div>
+  
+
+  
+  <section class="hero">
+    <h2>Delicious Food Delivered in Patna</h2>
+    <button>Order Now</button>
+  </section>
+
+ 
+  <section class="menu" id="menu">
+    <h2>Our Menu</h2>
+    <div class="menu-items">
+      <div class="card">
+        <img src="pizza.jpg" alt="Pizza">
+        <h3>Pizza</h3>
+        <p class="price">₹250</p>
+        <p>Cheesy delight with fresh toppings.</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="card">
+        <img src="burger.jpg" alt="Burger">
+        <h3>Burger</h3>
+        <p class="price">₹100</p>
+        <p>Juicy grilled burger with fries.</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="card">
+        <img src="pasta.jpg" alt="Pasta">
+        <h3>Pasta</h3>
+        <p class="price">₹50</p>
+
+        
+        <p>Italian pasta in creamy sauce.</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="card">
+        <img src="Litti-Chokha.webp" alt="Pasta">
+        <h3>Litti chokha</h3>
+        <p class="price">₹150</p>
+        <p>Bihari spicy taste.</p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+  </section>
+  
+<button onclick="placeOrder()">Place Order</button>
+
+ 
+ 
+<script src = "script.js"></script>
+ <script src="script2.js"></script>
+  <!-- Floating Cart Icon -->
+<div id="floating-cart">
+  <ion-icon name="cart-outline"></ion-icon>
+  <span id="cart-count">0</span>
+</div>
+
+<!-- Load Ionicons (for the cart icon) -->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script>
+  // Select all "Add to Cart" buttons
+  const addToCartButtons = document.querySelectorAll(".card button");
+  const cartCountElement = document.getElementById("cart-count");
+  
+  // Initialize cart count
+  let cartCount = 0;
+
+  // Add event listeners to each button
+  addToCartButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      cartCount++;
+      cartCountElement.textContent = cartCount;
+
+      // Optional: Add a small animation or alert
+      button.textContent = "Added!";
+      button.style.background = "green";
+
+      setTimeout(() => {
+        button.textContent = "Add to Cart";
+        button.style.background = "#ff4757";
+      }, 1000);
+    });
+  });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const searchInput = document.querySelector(".search input");
+  const cards = document.querySelectorAll(".card");
+
+  searchInput.addEventListener("input", function () {
+    let searchText = searchInput.value.toLowerCase().trim();
+
+    cards.forEach(card => {
+      let foodName = card.querySelector("h3").textContent.toLowerCase();
+
+      if (foodName.includes(searchText)) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+  });
+
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const searchInput = document.querySelector(".search input");
+  const searchBtn = document.querySelector(".search-btn");
+  const cards = document.querySelectorAll(".card");
+
+  console.log("SEARCH INPUT FOUND:", searchInput);
+  console.log("SEARCH BUTTON FOUND:", searchBtn);
+  console.log("CARDS FOUND:", cards.length);
+
+  if (!searchInput) {
+    console.error("❌ ERROR: .search input NOT FOUND in HTML.");
+    return;
+  }
+
+  function searchItems() {
+    let term = searchInput.value.toLowerCase().trim();
+    console.log("SEARCH TERM:", term);
+
+    cards.forEach(card => {
+      const name = card.querySelector("h3").textContent.toLowerCase();
+
+      if (name.includes(term)) {
+        card.style.display = "";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+
+  searchInput.addEventListener("input", searchItems);
+  searchBtn.addEventListener("click", searchItems);
+
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const notifyBtn = document.getElementById("notify-btn");
+  const notifyBox = document.getElementById("notification-box");
+
+  notifyBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    // Toggle panel
+    notifyBox.classList.toggle("show");
+
+    // Auto close after 4 seconds
+    setTimeout(() => {
+      notifyBox.classList.remove("show");
+    }, 4000);
+  });
+
+});
+</script>
+
+<div id="notification-box">
+  <h3>Notifications</h3>
+  <ul>
+    <li>🍕 Your pizza order is being prepared.</li>
+    <li>🛵 Delivery boy is arriving soon.</li>
+    <li>🎉 New offer available — 20% OFF!</li>
+  </ul>
+</div>
+<script>
+let cart = [];
+let total = 0;
+
+// ADD ITEMS TO CART AND SAVE TO LOCAL STORAGE
+document.querySelectorAll(".card button").forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    const card = e.target.closest(".card");
+    const itemName = card.querySelector("h3").textContent;
+    const itemPrice = Number(card.querySelector(".price").textContent.replace("₹",""));
+
+    // Add item
+    cart.push({ name: itemName, price: itemPrice });
+    total += itemPrice;
+
+    // Save to localStorage IMMEDIATELY
+    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("total", total);
+  });
+});
+
+// PLACE ORDER → goes to order.html
+function placeOrder() {
+
+  const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  if (savedCart.length === 0) {
+    alert("Cart is empty!");
+    return;
+  }
+
+  window.location.href = "order.html";
+}
+</script>
+
+
+
+</body>
+</html>

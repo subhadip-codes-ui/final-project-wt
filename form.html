@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login / Signup - Food Time</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #ff4b2b, #ff416c);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: white;
+      width: 400px;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      text-align: center;
+      transition: 0.5s;
+    }
+
+    h2 {
+      color: #ff4b2b;
+      margin-bottom: 15px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      background: #ff4b2b;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ff6b6b;
+    }
+
+    p {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    p a {
+      color: #ff4b2b;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    p a:hover {
+      text-decoration: underline;
+    }
+
+    .error {
+      color: red;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="form-box">
+    <h2 id="form-title">Login</h2>
+    <form id="loginForm">
+      <input type="email" id="loginEmail" placeholder="Enter your email" required>
+      <input type="password" id="loginPassword" placeholder="Enter your password" required>
+      <button type="submit">Login</button>
+      <p>Don't have an account? <a id="showSignup">Sign up</a></p>
+      <p class="error" id="loginError"></p>
+    </form>
+
+    <form id="signupForm" style="display: none;">
+      <input type="text" id="signupName" placeholder="Enter your name" required>
+      <input type="email" id="signupEmail" placeholder="Enter your email" required>
+      <input type="password" id="signupPassword" placeholder="Create a password" required>
+      <button type="submit">Sign Up</button>
+      <p>Already have an account? <a id="showLogin">Login</a></p>
+      <p class="error" id="signupError"></p>
+    </form>
+  </div>
+
+  <script>
+    // Switch between Login and Signup
+    const showSignup = document.getElementById("showSignup");
+    const showLogin = document.getElementById("showLogin");
+    const loginForm = document.getElementById("loginForm");
+    const signupForm = document.getElementById("signupForm");
+    const formTitle = document.getElementById("form-title");
+
+    showSignup.addEventListener("click", () => {
+      loginForm.style.display = "none";
+      signupForm.style.display = "flex";
+      formTitle.textContent = "Sign Up";
+    });
+
+    showLogin.addEventListener("click", () => {
+      signupForm.style.display = "none";
+      loginForm.style.display = "flex";
+      formTitle.textContent = "Login";
+    });
+
+    // Signup form validation
+    signupForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("signupName").value.trim();
+      const email = document.getElementById("signupEmail").value.trim();
+      const password = document.getElementById("signupPassword").value.trim();
+      const signupError = document.getElementById("signupError");
+
+      if (!email.includes("@") || password.length < 6) {
+        signupError.textContent = "Invalid email or password must be at least 6 characters.";
+      } else {
+        signupError.textContent = "";
+        alert("🎉 Signup successful! Please login now.");
+        signupForm.reset();
+        signupForm.style.display = "none";
+        loginForm.style.display = "flex";
+        formTitle.textContent = "Login";
+      }
+    });
+
+    // Login form validation
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value.trim();
+      const loginError = document.getElementById("loginError");
+
+      if (email === "" || password === "") {
+        loginError.textContent = "Please enter email and password.";
+      } else {
+        loginError.textContent = "";
+        alert("✅ Login successful! Redirecting to homepage...");
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+
+</body>
+</html>
+

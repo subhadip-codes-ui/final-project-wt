@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Bill - Food Time</title>
+  <link rel="stylesheet" href="first.css">
+ 
+ <style>#order-form-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+}
+
+.order-form {
+  background: white;
+  width: 350px;
+  padding: 20px;
+  border-radius: 10px;
+  animation: popIn 0.3s ease;
+}
+
+.order-form input,
+.order-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+</style>
+</head>
+<body>
+  <header>
+    <h1>Your Bill</h1>
+    <a href="index.html" style="color:white; text-decoration:none;">← Back to Home</a>
+  </header>
+
+  <section class="bill-section">
+    <div class="bill-container">
+      <h2>Order Summary</h2>
+      <ul id="bill-items"></ul>
+      <h3>Total: ₹<span id="bill-total">0</span></h3>
+      <p id="bill-location"></p>
+      <button onclick="window.location.href='index.html'">Order More</button>
+    </div>
+  </section>
+<div id="order-form-box">
+  <div class="order-form">
+    <h2>Place Your Order</h2>
+
+    <label>Name:</label>
+    <input type="text" id="cust-name" placeholder="Enter your name">
+
+    <label>Address:</label>
+    <textarea id="cust-address" placeholder="Enter delivery address"></textarea>
+
+    <label>Phone:</label>
+    <input type="text" id="cust-phone" placeholder="Enter phone number">
+
+    <button id="final-order-btn">Confirm Order</button>
+    <button id="close-order-form">Cancel</button>
+  </div>
+</div>
+
+
+<script>
+const items = JSON.parse(localStorage.getItem("cart")) || [];
+const total = localStorage.getItem("total") || 0;
+
+const name = localStorage.getItem("customerName") || "Not Provided";
+const address = localStorage.getItem("customerAddress") || "Not Provided";
+const phone = localStorage.getItem("customerPhone") || "Not Provided";
+
+// Show items
+document.getElementById("bill-items").innerHTML =
+  items.map(i => `<li>${i.name} - ₹${i.price}</li>`).join("");
+
+// Show total
+document.getElementById("bill-total").textContent = total;
+
+// Show user details
+document.getElementById("bill-location").innerHTML = `
+<b>Name:</b> ${name}<br>
+<b>Address:</b> ${address}<br>
+<b>Phone:</b> ${phone}
+`;
+</script>
+
+</body>
+</html>
